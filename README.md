@@ -1,4 +1,4 @@
-# OsmDashboard
+# apm-geomap
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
 
@@ -23,8 +23,6 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 - http://localhost:4200/
 - http://localhost:4200/dashboard
-- http://localhost:4200/province/province-list/
-- http://localhost:4200/login
 
 ```
 
