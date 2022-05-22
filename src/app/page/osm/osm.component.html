@@ -1,0 +1,150 @@
+<div class="page-wrapper">
+    <header id="page-header">
+        <nav>
+            <div class="left">
+                <a href="#" class="brand"><img src="assets/img/logo.png" alt=""></a>
+                รายงานผลสํารวจมาตรฐานชีวิตคนพิการ &nbsp;&nbsp;&nbsp;&nbsp;<a href="https://apm.numedapp.com/dashboard" class="promoted">“พม. รู้จักคุณ”</a>
+            </div>
+            <!--end left-->
+            
+            <!--MEGA menu right-->
+			<div class="right">
+                
+			</div>
+            <div class="secondary-nav">
+                <a routerLink="/login" class="promoted">ออกจากระบบ</a>
+            </div>
+            <!--end secondary-nav-->
+			<!--end right-->
+			
+        </nav>
+        <!--end nav-->
+    </header>
+    <!--end page-header-->
+
+    <div id="page-content">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="active">Dashboard</li>
+            </ol>
+            <!--end breadcrumb-->
+            
+            <!--content-->
+
+            <!--<login></login>-->
+
+            <div class="hero-section full-screen has-map has-sidebar sidebar-grid">
+                <div class="map-wrapper">
+                    <div class="geo-location">
+                        <i class="fa fa-map-marker"></i>
+                    </div>
+                    <div id="map"></div>
+                </div>
+                <!--end map-wrapper-->
+                <div class="results-wrapper">
+                    <div class="sidebar-detail">
+                        <div class="tse-scrollable">
+                            <div class="tse-content">
+                                <div class="sidebar-wrapper"></div>
+                                <!--end sidebar-detail-content-->
+                            </div>
+                            <!--end tse-content-->
+                        </div>
+                        <!--end tse-scrollable-->
+                    </div>
+                    <!--end sidebar-detail-->
+                    <div class="form search-form inputs-underline">
+                        <form>
+                            <div class="section-title">
+                                <h2>Search</h2>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="keyword" placeholder="Enter keyword">
+                            </div>
+                            <!--end form-group-->
+                            
+                            
+                            
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+
+                                    <!--end form-group-->
+                                </div>
+                                <!--end col-md-6-->
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <select class="form-control" name="select_province" (change)="list_prov($any($event.target).value)">
+                                            <option value="" selected>เลือกทุกจังหวัด</option>
+                                            <option *ngFor="let item of province_list; let i=index" value="{{item.pv_tn}}">{{ item.pv_tn}}</option>
+                                        </select>
+                                    </div>
+                                    <!--end form-group-->
+                                </div>
+                                <!--end col-md-6-->
+                            </div>
+                            <!--end row-->
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="ui-slider" id="price-slider" data-value-min="10" data-value-max="400" data-value-type="price" data-currency="$" data-currency-placement="before">
+                                            <div class="values clearfix">
+                                                <input class="value-min" name="value-min[]" readonly>
+                                                <input class="value-max" name="value-max[]" readonly>
+                                            </div>
+                                            <div class="element"></div>
+                                        </div>
+                                        <!--end price-slider-->
+                                    </div>
+                                </div>
+                                <!--end col-md-6-->
+                                <div class="col-md-6 col-sm-6">
+            
+                                </div>
+                                <!--end col-md-6-->
+                            </div>
+                            <!--end row-->
+            
+                            <!--end form-group-->
+                        </form>
+                        <!--end form-hero-->
+                    </div>
+                    <div class="results">
+                        <div class="tse-scrollable">
+                            <div class="tse-content">
+                                <div class="section-title">
+                                    <h2>Search Results<span class="results-number"></span></h2>
+                                </div>
+                                <!--end section-title-->
+                                <div class="results-content"></div>
+                                <!--end results-content-->
+                            </div>
+                            <!--end tse-content-->
+                        </div>
+                        <!--end tse-scrollable-->
+                    </div>
+                    <!--end results-->
+                </div>
+                <!--end results-wrapper-->
+            
+            
+            
+            </div>
+
+
+
+            <!--end content-->
+
+            <!--end ro-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end page-content-->
+
+
+</div>
+
+
+
+
+
+

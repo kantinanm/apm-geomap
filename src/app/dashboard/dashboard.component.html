@@ -1,0 +1,25 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card">
+                    
+                    <h2>เลือกพื้นที่</h2>
+                    <br>
+                    <div class="form-group">
+                        <label for="sel1">จังหวัด:</label>
+                        <select class="form-control" name="select_province" (change)="list_prov($any($event.target).value)">
+                            <option value="" selected>เลือกทุกจังหวัด</option>
+                            <option *ngFor="let item of province_list; let i=index" value="{{item.pv_tn}}">{{ item.pv_tn}}</option>
+                        </select>
+                      </div>
+            </div>
+            
+        </div>
+        <div class="col-sm-9">
+            <div class="card">
+                <div id="map"></div> 
+            </div>
+        </div>
+    </div>
+</div>
