@@ -67,19 +67,18 @@
                             
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
-                                    <select class="form-control" name="select_issue">
+                                    <select class="form-control"  name="select_cripple_category" id="select_cripple_category" (change)="list_cat($any($event.target).value)">
                                         <option value="" selected>เลือกทุกสภาพความพิการ</option>
-                                        <option value="ตาบอด" >ตาบอด</option>
-                                        <option value="หูนวก" >หูนวก</option>
+                                        <option *ngFor="let item of cripple_category_list; let i=index" value="{{item.id}}">{{ item.description}}</option>
                                     </select>
                                     <!--end form-group-->
                                 </div>
                                 <!--end col-md-6-->
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
-                                        <select class="form-control" name="select_province" (change)="list_prov($any($event.target).value)">
+                                        <select class="form-control" id="select_province" name="select_province" (change)="list_prov($any($event.target).value)">
                                             <option value="" selected>เลือกทุกจังหวัด</option>
-                                            <option *ngFor="let item of province_list; let i=index" value="{{item.pv_tn}}">{{ item.pv_tn}}</option>
+                                            <option *ngFor="let item of province_list; let i=index" value="{{item.pv_code}}">{{ item.pv_tn}}</option>
                                         </select>
                                     </div>
                                     <!--end form-group-->
