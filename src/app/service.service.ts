@@ -127,6 +127,28 @@ export class ServiceService {
     });
   }
 
+  async overall_report() {
+    return new Promise((res, rej) => {
+      this.http.get('http://localhost/medcare_api/req_data.php?type=get_all_report')
+        .subscribe((data: any) => {
+          res(data)
+        }, (err: any) => {
+          rej(err)
+        });
+    });
+  }
+
+  async province_overall_report(data:any) {
+    return new Promise((res, rej) => {
+      this.http.post('http://localhost/medcare_api/req_data.php?type=filter_prov_report', JSON.stringify(data))
+        .subscribe((data: any) => {
+          res(data)
+        }, (err: any) => {
+          rej(err)
+        });
+    });
+  }
+
 
 
 

@@ -1,0 +1,38 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>NO</th>
+        <th>อำเภอ/เขต</th>
+        <th>กลุ่ม 1</th>
+        <th>กลุ่ม 2</th>
+        <th>กลุ่ม 3</th>
+        <th>กลุ่ม 4</th>
+        <th>กลุ่ม 5</th>
+        <th>กลุ่ม 6</th>
+        <th>กลุ่ม 7</th>
+        <th>กลุ่ม 8</th>
+        <th>กลุ่ม 9</th>
+    </tr>
+    </thead>
+    <tfoot>
+        <tr>
+        <th colspan="11"></th>
+        </tr>
+        </tfoot>
+    <tbody>
+    <tr *ngFor="let data of data_list;let i=index">
+        <td>{{i+1}}</td>
+        <td>{{data.ap_tn}}</td>
+        <td>{{data.gp1 | number:0 }}</td>
+        <td>{{data.gp2 | number:0}}</td>
+        <td>{{data.gp3 | number:0}}</td>
+        <td>{{data.gp4 | number:0}}</td>
+        <td>{{data.gp5 | number:0}}</td>
+        <td>{{data.gp6 | number:0}}</td>
+        <td>{{data.gp7 | number:0}}</td>
+        <td>{{data.gp8 | number:0}}</td>
+        <td>{{data.gp9 | number:0}}</td>
+    </tr>
+
+    </tbody>
+</table>
