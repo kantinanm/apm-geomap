@@ -80,6 +80,17 @@ export class ServiceService {
     });
   }
 
+  async cripple_data_filter(data:any) { //คนพิการทั้งหมดทุกจังหวัด
+    return new Promise((res, rej) => {
+      this.http.post('http://localhost/medcare_api/req_data.php?type=get_cripple_by_cat', JSON.stringify(data))
+        .subscribe((data: any) => {
+          res(data)
+        }, (err: any) => {
+          rej(err)
+        });
+    });
+  }
+
   async cripple_count() {
     //console.log(data);
     return new Promise((res, rej) => {
@@ -96,6 +107,18 @@ export class ServiceService {
     console.log(data);
     return new Promise((res, rej) => {
       this.http.post('http://localhost/medcare_api/req_data.php?type=cripple_count_prov_q', JSON.stringify(data))
+        .subscribe((data: any) => {
+          res(data)
+        }, (err: any) => {
+          rej(err)
+        });
+    });
+  }
+
+  async cripple_data_by_cat(data:any) {
+    console.log(data);
+    return new Promise((res, rej) => {
+      this.http.post('http://localhost/medcare_api/req_data.php?type=get_cripple_by_cat', JSON.stringify(data))
         .subscribe((data: any) => {
           res(data)
         }, (err: any) => {

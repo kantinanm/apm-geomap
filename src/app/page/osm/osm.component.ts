@@ -128,8 +128,8 @@ export class OsmComponent implements OnInit {
   function onEachFeature(feature:any, layer:any) {
 
     var popupContent = "<p>จังหวัด <b>" +
-        feature.properties.pv_tn + "</b></br> มีการสำรวจทั้งหมด " +
-        feature.properties.val + " จุด</br>";
+        feature.properties.pv_tn + "</b></br> พบผู้พิการจำนวน " +
+        feature.properties.val + " ราย</br>";
 
     if (feature.properties && feature.properties.popupContent) {
         popupContent += feature.properties.popupContent;
@@ -209,8 +209,8 @@ export class OsmComponent implements OnInit {
   };
   
   var overlayMaps = {
-    "จุดสำรวจ": this.markersGroup,
-    "ผลรวมจุดสำรวจรายพื้นที่": this.layerGroup
+    "จุดที่พบผู้พิการ": this.markersGroup,
+    "ผลรวมรายพื้นที่": this.layerGroup
   };
 
   L.control.layers(baseMaps, overlayMaps).addTo(this.map);
@@ -301,7 +301,7 @@ export class OsmComponent implements OnInit {
       this.map.fitBounds(this.lay_province.getBounds())
 
 
-      this.service.cripple_data().then((res: any) => {
+      this.service.cripple_count_prov_q({prov_id: item,cat_id:id }).then((res: any) => {
         res.forEach((e:any) => {
             if(e.province_id == item){
               
@@ -314,7 +314,7 @@ export class OsmComponent implements OnInit {
 
 
     }else{ //ไม่มีการเลือก selected
-      this.service.cripple_count().then((res: any) => {
+      this.service.cripple_count_prov_q({prov_id: item,cat_id:id }).then((res: any) => {
           this.lay_province = L.geoJSON(res, {
               style: style,
               onEachFeature: onEachFeature
@@ -322,7 +322,7 @@ export class OsmComponent implements OnInit {
           this.map.fitBounds(this.lay_province.getBounds())// focus
       })
 
-      this.service.cripple_data().then((res: any) => {
+      this.service.cripple_count_prov_q({prov_id: item,cat_id:id }).then((res: any) => {
         console.log(res);
         res.forEach((e:any) => {
           L.marker([e.lat, e.long],{icon: this.icon1}).addTo(this.markersGroup)
@@ -332,13 +332,8 @@ export class OsmComponent implements OnInit {
     })
 
     }
-
-
-
-
   
     })
-
 
   }
 
@@ -417,7 +412,7 @@ export class OsmComponent implements OnInit {
     }
 */
 
-    if(id != ''){ //ถ้ามีการเลือก selected
+    if(item != ''){ //ถ้ามีการเลือก selected
 
       this.lay_province = L.geoJSON(res, {
           style: style,
@@ -427,9 +422,9 @@ export class OsmComponent implements OnInit {
 
         // filter by cat 
         // must implement by POST DATA filter by categoty
-      this.service.cripple_data().then((res: any) => {
+      this.service.cripple_data_by_cat({prov_id: id,cat_id:item }).then((res: any) => {
         res.forEach((e:any) => {
-            if(e.province_id == item){
+            if(e.cripple_category == item){
               
                 L.marker([e.lat, e.long],{icon: this.icon1}).addTo(this.markersGroup)
                 .bindPopup("<h4>รายละเอียด</h4><b>ชื่อ - สกุล : </b>" + e.prename + e.firstname + "  " + e.lastname + "<br><b>ประเภทความพิการ : </b>" + e.cripple_category_name + "<br><b>จัดอยู่ในกลุ่มอายุ : </b>" + e.age_group + " ปี.<br><br>");
@@ -441,7 +436,9 @@ export class OsmComponent implements OnInit {
 
     }else{ //ไม่มีการเลือก selected
       // must implement by POST DATA filter by categoty
-      this.service.cripple_count().then((res: any) => {
+
+      //filter by province only
+      this.service.cripple_count_prov_q({prov_id: id,cat_id:item }).then((res: any) => {
           this.lay_province = L.geoJSON(res, {
               style: style,
               onEachFeature: onEachFeature
@@ -449,7 +446,7 @@ export class OsmComponent implements OnInit {
           this.map.fitBounds(this.lay_province.getBounds())// focus
       })
 
-      this.service.cripple_data().then((res: any) => {
+      this.service.cripple_count_prov_q({prov_id: id,cat_id:item }).then((res: any) => {
         console.log(res);
         res.forEach((e:any) => {
           L.marker([e.lat, e.long],{icon: this.icon1}).addTo(this.markersGroup)
@@ -459,9 +456,6 @@ export class OsmComponent implements OnInit {
     })
 
     }
-
-
-
 
   
     })
