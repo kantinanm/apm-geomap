@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ServiceService } from '../../service.service';
+import { OverallComponent } from '../report/overall/overall.component';
+import { OverallProvinceComponent } from '../report/overall-province/overall-province.component';
 import * as L from 'Leaflet';
 import 'leaflet.markercluster';
 
@@ -10,7 +12,11 @@ import 'leaflet.markercluster';
   styleUrls: ['./osm.component.css']
 })
 export class OsmComponent implements OnInit {
-
+  @ViewChild('placeholder', { read:ViewContainerRef,static: true })
+  
+  public placeholder!:ViewContainerRef
+  public componentRefs: ComponentRef<OverallComponent>[] = []
+  
   private map: any;
   basemap:any;
   basemap2:any;
@@ -37,9 +43,7 @@ export class OsmComponent implements OnInit {
   selectedValueProvince: any;
   mySelectCategory: any;
 
-  constructor(
-    public service : ServiceService
-  ) {  
+  constructor(private resolver:ComponentFactoryResolver ,public service : ServiceService) {  
     this.service.list_province().then((res: any) => {
     this.province_list = res})
  
@@ -47,8 +51,11 @@ export class OsmComponent implements OnInit {
     this.cripple_category_list = res})
   }
 
-  ngOnInit(): void {
-  
+  async ngOnInit() {
+    
+    this.placeholder.clear();
+    const componentFactory =this.resolver.resolveComponentFactory(OverallComponent);
+    const component =this.placeholder.createComponent(componentFactory);
     this.Showmap();
 
     /*$('button').click(function(){
@@ -224,6 +231,10 @@ export class OsmComponent implements OnInit {
     var id=$("select#select_cripple_category option").filter(":selected").val()
     console.log($("select#select_cripple_category option").filter(":selected").val());
 
+    /*this.placeholder.clear();
+    const componentFactory =this.resolver.resolveComponentFactory(OverallComponent);
+    const component =this.placeholder.createComponent(componentFactory);*/
+
     this.layerGroup.clearLayers();
     this.markersGroup.clearLayers();
     //  get category id and passing value to cripple_count_prov_q method
@@ -337,12 +348,20 @@ export class OsmComponent implements OnInit {
 
   }
 
-  list_cat(item:any){
+   list_cat(item:any){
     console.log("cripple_category ID");
     console.log(item);
     console.log("Province ID");
     var id=$("select#select_province option").filter(":selected").val()
-    console.log($("select#select_province option").filter(":selected").val());
+    console.log($("select#select_province option").filter(":selected").text());
+
+
+    /*this.placeholder.clear();
+    const componentFactory =this.resolver.resolveComponentFactory(OverallProvinceComponent);
+    const component =this.placeholder.createComponent(componentFactory);
+    component.instance.province_id= id.toString();
+    component.instance.province_name= $("select#select_province option").filter(":selected").text();*/
+
 
     this.layerGroup.clearLayers();
     this.markersGroup.clearLayers();
